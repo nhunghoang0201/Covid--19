@@ -144,18 +144,17 @@ order by 1
 */
 
 Create View table_1 as 
-select 
-  dea.location, 
-  dea.continent, 
-  dea.date, 
-  dea.population, 
-  dea.total_cases, 
-  dea.new_cases, 
-  dea.total_deaths, 
-  dea.new_deaths, 
-  vac.total_vaccinations, 
-  vac.people_vaccinated, 
-  vac.people_fully_vaccinated
+select dea.location, 
+       dea.continent, 
+       dea.date, 
+       dea.population, 
+       dea.total_cases, 
+       dea.new_cases, 
+       dea.total_deaths, 
+       dea.new_deaths, 
+       vac.total_vaccinations, 
+       vac.people_vaccinated, 
+       vac.people_fully_vaccinated
 from PortfolioProject..CovidDeaths$ dea
 left join PortfolioProject..CovidVaccinations$ vac on dea.location = vac.location and dea.date = vac.date
 where dea.continent is not null
