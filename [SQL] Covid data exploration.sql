@@ -1,5 +1,5 @@
 /* 
-1. Data wrangling
+1. Data cleaning
 */
 
 -- Replace null values with 0 to ensure data uniformity 
@@ -32,7 +32,7 @@ ALTER COLUMN new_deaths int
 2. Data Exploration
 */
 
--- Show two data tables and order by date and location
+-- Show two data tables and order by location, continent and date
 select *
 from PortfolioProject..CovidDeaths$
 order by 2,3,4
@@ -109,7 +109,7 @@ from PortfolioProject..CovidVaccinations$ a left join PortfolioProject..CovidVac
 where a.continent is null and a.location not like '%income'
 order by 1,2,3
 
--- Calculate the daily percentage of the population vaccinated in the world
+-- Calculate the daily percentage of the population vaccinated in the world using table
 Drop table if exists #Percentagepopulationvaccinated
 create table #Percentagepopulationvaccinated
 (date datetime,
@@ -128,7 +128,7 @@ select a.date,
        a.people_fully_vaccinated, 
        a.people_fully_vaccinated - b.people_fully_vaccinated as new_people_fully_vaccinated
 from PortfolioProject..CovidVaccinations$ a 
-left join PortfolioProject..CovidVaccinations$ b on a.date -1 = b.date
+left join PortfolioProject..CovidVaccinations$ b on a.date -1 = b.date and a.location = b.location
 left join PortfolioProject..CovidDeaths$ dea on a.date = dea.date and a.location = dea.location
 where a.location ='world'
 order by 1
