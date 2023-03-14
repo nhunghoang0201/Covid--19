@@ -2,7 +2,6 @@
 /* 
 1. Data cleaning
 */
-
 -- Change data types to the proper data types
 ALTER TABLE PortfolioProject..CovidDeaths$
 ALTER COLUMN total_deaths int
